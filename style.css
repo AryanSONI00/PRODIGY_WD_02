@@ -1,0 +1,292 @@
+
+body {
+	font-family: "Arial", sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #212121;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
+	background-image: url('./clock-1.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Loading screen */
+.loading-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #212121;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+	transition: opacity 0.5s ease;
+}
+
+.loading-screen.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Spinner for loading */
+.spinner {
+	width: 44px;
+	height: 44px;
+	animation: spinner-y0fdc1 2s infinite ease;
+	transform-style: preserve-3d;
+}
+
+.spinner > div {
+	background-color: rgba(0, 77, 255, 0.2);
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	border: 2px solid #004dff;
+}
+
+.spinner div:nth-of-type(1) {
+	transform: translateZ(-22px) rotateY(180deg);
+}
+
+.spinner div:nth-of-type(2) {
+	transform: rotateY(-270deg) translateX(50%);
+	transform-origin: top right;
+}
+
+.spinner div:nth-of-type(3) {
+	transform: rotateY(270deg) translateX(-50%);
+	transform-origin: center left;
+}
+
+.spinner div:nth-of-type(4) {
+	transform: rotateX(90deg) translateY(-50%);
+	transform-origin: top center;
+}
+
+.spinner div:nth-of-type(5) {
+	transform: rotateX(-90deg) translateY(50%);
+	transform-origin: bottom center;
+}
+
+.spinner div:nth-of-type(6) {
+	transform: translateZ(22px);
+}
+
+@keyframes spinner-y0fdc1 {
+	0% {
+		transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+	}
+	50% {
+		transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+	}
+	100% {
+		transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+	}
+}
+
+/* Stopwatch container */
+.container {
+	text-align: center;
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+
+/* Lap Button Design */
+.lap-button {
+	width: 9em;
+	height: 3em;
+	border-radius: 30em;
+	font-size: 15px;
+	font-family: inherit;
+	border: none;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	background-color: #00a97f;
+	color: white;
+	box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+	cursor: pointer;
+}
+
+.lap-button::before {
+	content: "";
+	width: 0;
+	height: 3em;
+	border-radius: 30em;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+	transition: 0.5s ease;
+	display: block;
+	z-index: -1;
+}
+
+.lap-button:hover::before {
+	width: 9em;
+}
+
+.lap-button:hover {
+	color: white;
+}
+
+/* Button Styles */
+.btn {
+	--color: #00a97f;
+	--color2: rgb(10, 25, 30);
+	padding: 0.8em 1.75em;
+	background-color: transparent;
+	border-radius: 6px;
+	border: 2px solid var(--color);
+	transition: 0.3s ease-in-out;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	z-index: 1;
+	font-weight: 300;
+	font-size: 17px;
+	font-family: "Roboto", "Segoe UI", sans-serif;
+	text-transform: uppercase;
+	color: var(--color);
+}
+
+.btn::after, .btn::before {
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	transform: skew(90deg) translate(-50%, -50%);
+	position: absolute;
+	inset: 50%;
+	left: 25%;
+	z-index: -1;
+	transition: 0.5s ease-out;
+	background-color: var(--color);
+}
+
+.btn::before {
+	top: -50%;
+	left: -25%;
+	transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::before {
+	transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::after {
+	transform: skew(45deg) translate(-50%, -50%);
+}
+
+.btn:hover {
+	color: var(--color2);
+}
+
+.btn:active {
+	filter: brightness(0.7);
+	transform: scale(0.98);
+}
+
+/* Clock-like Stopwatch UI */
+.title {
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+	color: #fff;
+	letter-spacing: 2px;
+	animation: fadeInDown 2s;
+}
+
+.display-clock {
+	font-size: 4rem;
+	letter-spacing: 0.1em;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: #f3f3f3;
+	padding: 1rem 2.5rem;
+	border-radius: 50px;
+	border: 5px solid #444;
+	box-shadow: inset 0px 0px 20px rgba(255, 255, 255, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.5);
+	animation: clockPulse 1s infinite alternate ease-in-out;
+	display: inline-block;
+}
+
+@keyframes clockPulse {
+	0% {
+		transform: scale(1);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+	100% {
+		transform: scale(1.03);
+		background-color: rgba(0, 0, 0, 0.8);
+	}
+}
+
+/* Controls layout */
+.controls {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
+}
+
+/* Lap Container that expands */
+.lap-container {
+	background-color: rgba(51, 51, 51, 0.8);
+	padding: 1rem;
+	border-radius: 10px;
+	width: 200px;
+	max-width: 400px;
+	margin: 0 auto;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+	transition: width 0.5s ease-in-out;
+}
+
+.lap-container.expanded {
+	width: 100%; 
+}
+
+.laps-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.laps-list li {
+	padding: 0.5rem;
+	background-color: #444;
+	margin: 0.5rem 0;
+	border-radius: 5px;
+	color: white;
+	animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

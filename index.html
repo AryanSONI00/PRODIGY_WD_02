@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- Stopwatch container -->
+  <div id="stopwatchContainer" class="hidden container">
+    <h1 class="title">Stopwatch</h1>
+
+    <!-- Clock Display Time -->
+    <div id="displayClock" class="display-clock">00:00:00</div>
+    <div class="controls">
+      <button id="startBtn" class="btn">Start</button>
+      <button id="pauseBtn" class="btn hidden">Pause</button>
+      <button id="resetBtn" class="btn hidden">Reset</button>
+      <button id="lapBtn" class="lap-button hidden">Lap!</button>
+    </div>
+
+    <!-- Lap time -->
+    <div id="lapContainer" class="lap-container p-4 bg-gray-900 rounded-lg shadow-lg max-w-sm mx-auto">
+      <h2 class="text-xl font-semibold text-white text-center mb-4">Laps</h2>
+      <ul id="laps" class="laps-list space-y-2">
+      </ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
